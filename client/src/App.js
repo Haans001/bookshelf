@@ -1,9 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import MainTemple from './templates/MainTemplate';
+import IndexPage from './components/IndexPage/IndexPage';
 
-class App extends Component {
-  render() {
-    return <div className="App" />;
-  }
-}
+const App = () => {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <MainTemple>
+          <Switch>
+            <Route exact path="/" component={IndexPage} />
+            <Route render={() => <Redirect to="/" />} />
+          </Switch>
+        </MainTemple>
+      </BrowserRouter>
+    </div>
+  );
+};
 
 export default App;
