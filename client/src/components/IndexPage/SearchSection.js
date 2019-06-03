@@ -35,10 +35,10 @@ const StyledImage = styled.img`
 export default function SearchSection() {
   return (
     <StyledWrapper>
-      <Col flex="50%">
+      <Col flex={1}>
         <StyledImage src={searchImage} alt="" />
       </Col>
-      <Col flex="50%">
+      <Col flex={1}>
         <StyledDiv>
           <StyledHeading>
             Use a search engine to find favourite titles.

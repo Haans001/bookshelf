@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import NavLinks from './NavLinks';
 import Wrapper from '../StyledComponents/Wrapper';
@@ -30,6 +31,14 @@ const StyledHeading = styled.h1`
   }
 `;
 
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: white;
+  }
+`;
+
 export default function Navbar() {
   const [isOpen, open] = useState(false);
 
@@ -40,9 +49,11 @@ export default function Navbar() {
   return (
     <StyledHeader>
       <StyledWrapper>
-        <StyledHeading>
-          Bookphiles <i className="fas fa-book-open" />
-        </StyledHeading>
+        <StyledLink to="/">
+          <StyledHeading>
+            Bookphiles <i className="fas fa-book-open" />
+          </StyledHeading>
+        </StyledLink>
         <nav>
           <NavLinks />
         </nav>

@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import MainTemple from './templates/MainTemplate';
 import IndexPage from './pages/IndexPage';
 import Navbar from './components/Navbar/Navbar';
+import SearchComponent from './components/SearchComponent/SearchComponent';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route exact path="/" component={IndexPage} />
+            <Route path="/search" component={SearchComponent} />
             <Route render={() => <Redirect to="/" />} />
           </Switch>
         </MainTemple>

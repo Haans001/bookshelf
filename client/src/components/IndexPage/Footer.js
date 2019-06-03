@@ -40,7 +40,7 @@ export default function Footer() {
   return (
     <StyledFooter>
       <StyledWrapper>
-        <StyledCol flex="33%">
+        <StyledCol flex={1}>
           <StyledH3>
             Bookphiles <i className="fas fa-book-open" />
           </StyledH3>
@@ -49,14 +49,14 @@ export default function Footer() {
           <StyledLink>Apps</StyledLink>
           <StyledLink>Contact</StyledLink>
         </StyledCol>
-        <StyledCol flex="33%">
+        <StyledCol flex={1}>
           <StyledH3>Feautres</StyledH3>
           <StyledLink>Coolections</StyledLink>
           <StyledLink>Bookshelf</StyledLink>
           <StyledLink>Search Engine</StyledLink>
           <StyledLink>Contact</StyledLink>
         </StyledCol>
-        <StyledCol flex="33%">
+        <StyledCol flex={1}>
           <StyledH3>Contact & Medias</StyledH3>
           <StyledLink>
             <i className="fab fa-facebook-f" /> <i className="fab fa-twitter" />{' '}
