@@ -41,7 +41,7 @@ export default function NavLinks({ responsive }) {
     <StyledList responsive={responsive}>
       {/* Signed in links */}
       <li>
-        <StyledNavLink to="/">Search</StyledNavLink>
+        <StyledNavLink to="/search">Search</StyledNavLink>
       </li>
       <li>
         <StyledNavLink to="/">Bookshelf</StyledNavLink>

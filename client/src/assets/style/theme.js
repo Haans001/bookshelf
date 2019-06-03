@@ -1,7 +1,7 @@
 const theme = {
   fontSize: {
     xs: '.9rem',
-    links: '1.6 rem',
+    links: '1.6rem',
     s: '2.6rem',
     m: '3.6rem',
     l: '4.4rem',

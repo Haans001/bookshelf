@@ -54,7 +54,7 @@ const StyledImage = styled.img`
 export default function CollectionSection() {
   return (
     <StyledWrapper>
-      <Col flex="50%">
+      <Col flex={1}>
         <StyledDiv>
           <StyledHeading>
             Organize your book collection like a real bookshelf.{' '}
@@ -69,7 +69,7 @@ export default function CollectionSection() {
           </StyledButton>
         </StyledDiv>
       </Col>
-      <Col flex="50%">
+      <Col flex={1}>
         <StyledDiv>
           <StyledImage src={CollectionImage} alt="" />
         </StyledDiv>
