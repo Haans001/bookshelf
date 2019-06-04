@@ -10,4 +10,4 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(process.env.PORT || 5000, () => `Server running on port ${port}`);
+app.listen(process.env.PORT || 5000, () => `Server running on port`);
