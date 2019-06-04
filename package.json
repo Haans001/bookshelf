@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "Starter kit for creating React and Express apps",
   "main": "server.js",
+  "engines": {
+    "node": "10.15.0"
+  },
   "scripts": {
-    "client-install": "cd client && npm install",
+    "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "build": "npm run-script build --prefix client",
+    "build": "npm install --only=dev && npm install && npm run build --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Brad Traversy",
