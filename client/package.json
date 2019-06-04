@@ -7,9 +7,13 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.1",
+    "react-redux": "^7.0.3",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "1.0.17",
+    "react-star-ratings": "^2.3.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^4.2.0"
   },
   "scripts": {

@@ -14,11 +14,7 @@ const StyledWrapper = styled(Wrapper)`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  height: 100vh;
-
-  ${({ theme }) => theme.mq.tablet} {
-    margin-bottom: 200px;
-  }
+  margin-bottom: 100px;
 `;
 
 export default function Hero() {

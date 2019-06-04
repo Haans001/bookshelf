@@ -20,6 +20,7 @@ const theme = {
   colors: {
     grey: '#636262',
     lightGrey: '#ACACAC',
+    lighterGrey: '#F2F2F2',
     primary: '#1ABC9C',
     secondary: '#05C46B',
     white: '#fff',
