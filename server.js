@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
 
-const port = 5000 || process.env.PORT;
-
 if (process.env.NODE_ENV === "production") {
   // Set static folder
   app.use(express.static("client/build"));
@@ -12,4 +10,4 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(port, () => `Server running on port ${port}`);
+app.listen(process.env.PORT || 5000, () => `Server running on port ${port}`);
