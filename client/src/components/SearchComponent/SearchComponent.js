@@ -74,8 +74,8 @@ export default class SearchComponent extends Component {
         this.setState({
           data: resp.data.items,
         });
+        console.log(this.state.data);
       });
-    console.log(this.state.data);
   };
 
   render() {
