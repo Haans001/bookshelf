@@ -14,7 +14,7 @@ const StyledNav = styled.nav`
 `;
 
 export default function Navbar() {
-  const [isOpen, open] = useState(false);
+  const [isOpen, open] = useState(true);
 
   const toogleMenu = () => {
     if (isOpen) {
