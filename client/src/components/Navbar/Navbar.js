@@ -1,65 +1,58 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import $ from 'jquery';
 import styled from 'styled-components';
 import NavLinks from './NavLinks';
-import Wrapper from '../StyledComponents/Wrapper';
-import Hamburger from './Hamburger';
+import MobileNavLinks from './MobileNavLinks';
 
-const StyledHeader = styled.header`
-  background-color: ${({ theme }) => theme.colors.primary};
-  padding: 20px 0;
-  color: ${({ theme }) => theme.colors.white};
-  transition: 0.25s ease-in-out;
+const StyledNav = styled.nav`
+  padding: 10px 0;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 9999;
-`;
-const StyledWrapper = styled(Wrapper)`
-  justify-content: space-between;
-  align-items: center;
-`;
-const StyledHeading = styled.h1`
-  font-size: ${({ theme }) => theme.fontSize.l};
-  letter-spacing: 1px;
-  font-family: ${({ theme }) => theme.font.firaSans};
-  margin: 0;
-  transition: 0.25s ease-in-out;
-  ${({ theme }) => theme.mq.tablet} {
-    font-size: 2rem;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  color: white;
-  text-decoration: none;
-  &:hover {
-    color: white;
-  }
 `;
 
 export default function Navbar() {
   const [isOpen, open] = useState(false);
 
   const toogleMenu = () => {
+    if (isOpen) {
+      $('#mobile-nav').slideDown();
+    } else {
+      $('#mobile-nav').slideUp();
+    }
     open(!isOpen);
   };
 
   return (
-    <StyledHeader>
-      <StyledWrapper>
-        <StyledLink to="/">
-          <StyledHeading>
-            Bookphiles <i className="fas fa-book-open" />
-          </StyledHeading>
-        </StyledLink>
-        <nav>
-          <NavLinks />
-        </nav>
-        <Hamburger onClick={toogleMenu} />
-      </StyledWrapper>
-      <nav>{isOpen ? <NavLinks responsive /> : null}</nav>
-    </StyledHeader>
+    <StyledNav className="teal accent-4 nav-extended">
+      <div className="nav-wrapper container">
+        <Link className="brand-logo left" to="/">
+          Bookphiles <i className="fas fa-book-open" />
+        </Link>
+        <NavLinks />
+        <a href="#" data-target="mobile-demo" className="right sidenav-trigger">
+          <i className="material-icons" onClick={toogleMenu}>
+            menu
+          </i>
+        </a>
+      </div>
+      <MobileNavLinks />
+    </StyledNav>
+    // <StyledHeader>
+    //   <StyledWrapper>
+    //     <StyledLink to="/">
+    //       <StyledHeading>
+    //         Bookphiles <i className="fas fa-book-open" />
+    //       </StyledHeading>
+    //     </StyledLink>
+    //     <nav>
+    //       <NavLinks />
+    //     </nav>
+    //
+    //   </StyledWrapper>
+    //
+    // </StyledHeader>
   );
 }
