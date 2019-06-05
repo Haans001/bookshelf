@@ -17,15 +17,19 @@ const StyledWrapper = styled(Wrapper)`
   display: block;
 `;
 const StyledSearchInput = styled.input`
-  width: 100%;
+  flex: 3;
   padding: 20px 14px;
   color: ${({ theme }) => theme.colors.grey};
-  border-radius: 18px;
+  border-radius: 18px 0 0 18px;
   border: 3px ${({ theme }) => theme.colors.grey} solid;
   font-size: ${({ theme }) => theme.fontSize.s};
   ${({ theme }) => theme.mq.tablet} {
     font-size: ${({ theme }) => theme.fontSize.links};
   }
+`;
+const SearchBarWrapper = styled.div`
+  display: flex;
+  align-items: stretch;
 `;
 const InputWrapper = styled.div`
   display: flex;
@@ -43,7 +47,9 @@ const StyledLabel = styled.label`
 `;
 const StyledButton = styled(Button)`
   font-size: ${({ theme }) => theme.fontSize.links} !important;
+  display: block;
   border: none;
+  border-radius: 0 18px 18px 0;
   &:hover {
     cursor: pointer;
   }
@@ -85,13 +91,18 @@ export default class SearchComponent extends Component {
       <StyledWrapper>
         <StyledHeading>Search for books.</StyledHeading>
         <form onSubmit={this.handleSubmit}>
-          <StyledSearchInput
-            type="text"
-            id="querry"
-            required
-            placeholder="Type in title, author, category..."
-            onChange={this.handleChange}
-          />
+          <SearchBarWrapper>
+            <StyledSearchInput
+              type="text"
+              id="querry"
+              required
+              placeholder="Type in title, author, category..."
+              onChange={this.handleChange}
+            />
+            <StyledButton as="button" type="submit" primary>
+              Search <i className="fas fa-search" />
+            </StyledButton>
+          </SearchBarWrapper>
           <InputWrapper>
             <StyledLabel>
               <input
@@ -128,9 +139,6 @@ export default class SearchComponent extends Component {
               />
               <label htmlFor="maxResults">Max Results</label>
             </div>
-            <StyledButton as="button" type="submit" primary>
-              Search <i className="fas fa-search" />
-            </StyledButton>
           </InputWrapper>
         </form>
         <SearchResults data={data} />
