@@ -8,13 +8,17 @@ import img from '../../assets/images/hero-bg.jpg';
 const StyledWrapper = styled.div`
   padding-top: 130px;
   height: 100vh;
+
+  ${({ theme }) => theme.mq.tablet} {
+    padding-top: 80px;
+  }
 `;
 
 const StyledH2 = styled.h2`
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   margin-top: 50px;
   ${({ theme }) => theme.mq.tablet} {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 `;
 const StyledH3 = styled.h3`
@@ -29,6 +33,8 @@ const StyledSection = styled.section`
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${img});
   background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 export default function Hero() {

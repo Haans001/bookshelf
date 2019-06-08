@@ -23,7 +23,7 @@ export default function NavLinks() {
         <NavLink to="/">Sign In</NavLink>
       </li>
       <li>
-        <NavLink className="btn waves-effect red lighten-2 btn-large">
+        <NavLink to="/" className="btn waves-effect red lighten-2 btn-large">
           Sign Up
         </NavLink>
       </li>

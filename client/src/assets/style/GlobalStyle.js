@@ -15,6 +15,7 @@ body {
     font-size : 1.6rem;
     padding : 0;
     margin  :0;
+    
 }
 
 `;
