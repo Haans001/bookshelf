@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Wrapper from '../StyledComponents/Wrapper';
-import Button from '../StyledComponents/Button';
 import img from '../../assets/images/hero-bg.jpg';
 
 const StyledWrapper = styled.div`

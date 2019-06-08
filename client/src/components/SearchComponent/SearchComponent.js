@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_KEY } from '../../config/keys';
 import SearchResults from './SearchResults';
+import { searchBooks } from '../../store/actions/searchAction';
 
 const StyledWrapper = styled.div`
   padding-top: 130px;
@@ -70,7 +72,7 @@ const RadioField = styled.div`
   }
 `;
 
-export default class SearchComponent extends Component {
+class SearchComponent extends Component {
   state = {
     querry: '',
     maxResults: '10',
@@ -86,7 +88,9 @@ export default class SearchComponent extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { querry, orderBy, maxResults } = this.state;
-    console.log(this.state);
+    const { search } = this.props;
+
+    search(this.state);
 
     axios
       .get(
@@ -96,7 +100,6 @@ export default class SearchComponent extends Component {
         this.setState({
           data: resp.data.items,
         });
-        console.log(this.state.data);
       });
   };
 
@@ -175,3 +178,17 @@ export default class SearchComponent extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  results: state.search.SearchResults,
+  error: state.search.searchError,
+});
+
+const mapDispatchToProps = dispatch => ({
+  search: state => dispatch(searchBooks(state)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchComponent);
