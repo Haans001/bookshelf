@@ -11,6 +11,10 @@ const StyledWrapper = styled.div`
       margin-top: 10px;
     }
   }
+
+  ${({ theme }) => theme.mq.desktop} {
+    display: none !important;
+  }
 `;
 
 export default function MobileNavLinks() {
@@ -35,7 +39,7 @@ export default function MobileNavLinks() {
           <NavLink to="/">Sign In</NavLink>
         </li>
         <li>
-          <NavLink className="btn waves-effect red lighten-2 btn-large">
+          <NavLink to="/" className="btn waves-effect red lighten-2 btn-large">
             Sign Up
           </NavLink>
         </li>

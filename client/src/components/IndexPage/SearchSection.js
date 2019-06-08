@@ -7,14 +7,13 @@ import searchImage from '../../assets/images/SearchImage.png';
 const StyledImage = styled.img`
   width: 120%;
   position: relative;
-  -webkit-box-shadow: 0px 0px 57px 0px rgba(173, 173, 173, 1);
-  -moz-box-shadow: 0px 0px 57px 0px rgba(173, 173, 173, 1);
-  box-shadow: 0px 0px 57px 0px rgba(173, 173, 173, 1);
   left: -170px;
   border-radius: 10px;
   ${({ theme }) => theme.mq.tablet} {
     margin-top: 20px;
     position: initial;
+    width: 100%;
+    transform: translateY(-4rem);
   }
 `;
 export const StyledParagraph = styled.p`

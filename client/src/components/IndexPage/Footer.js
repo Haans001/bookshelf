@@ -7,7 +7,7 @@ const StyledFooter = styled.footer`
 `;
 const StyledArticle = styled.article`
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   flex-direction: column;
   color: white;
@@ -16,6 +16,7 @@ const StyledArticle = styled.article`
   a {
     color: white;
     position: relative;
+    font-size: 1.2rem;
     &::after {
       content: '';
       height: 3px;
@@ -35,14 +36,6 @@ const StyledArticle = styled.article`
 const StyledH3 = styled.h3`
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGrey};
   padding-bottom: 10px;
-`;
-
-const StyledParagraph = styled.p`
-  text-align: center;
-  border-top: 2px solid ${({ theme }) => theme.colors.grey};
-  padding: 20px 0;
-  color: ${({ theme }) => theme.colors.white};
-  margin: 0;
 `;
 
 const MediasContainer = styled.div`
@@ -92,36 +85,5 @@ export default function Footer() {
         </div>
       </div>
     </StyledFooter>
-    // <StyledFooter>
-    //   <StyledWrapper>
-    //     <StyledCol flex={1}>
-    //       <StyledH3>
-    //         Bookphiles <i className="fas fa-book-open" />
-    //       </StyledH3>
-    //       <StyledLink>Home</StyledLink>
-    //       <StyledLink>About</StyledLink>
-    //       <StyledLink>Apps</StyledLink>
-    //       <StyledLink>Contact</StyledLink>
-    //     </StyledCol>
-    //     <StyledCol flex={1}>
-    //       <StyledH3>Feautres</StyledH3>
-    //       <StyledLink>Coolections</StyledLink>
-    //       <StyledLink>Bookshelf</StyledLink>
-    //       <StyledLink>Search Engine</StyledLink>
-    //       <StyledLink>Contact</StyledLink>
-    //     </StyledCol>
-    //     <StyledCol flex={1}>
-    //       <StyledH3>Contact & Medias</StyledH3>
-    //       <StyledLink>
-    //         <i className="fab fa-facebook-f" /> <i className="fab fa-twitter" />{' '}
-    //         <i className="fab fa-github" />
-    //       </StyledLink>
-    //       <StyledLink>jan.rapacz@interia.pl</StyledLink>
-    //       <StyledLink>Sucha Beskidzka ul.Magnoliowa 15 </StyledLink>
-    //       <StyledLink>34-200 Poland</StyledLink>
-    //     </StyledCol>
-    //   </StyledWrapper>
-    //   <StyledParagraph>Jan Rapacz &copy; 2019 - 2020</StyledParagraph>
-    // </StyledFooter>
   );
 }

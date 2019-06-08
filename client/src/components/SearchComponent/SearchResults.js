@@ -1,25 +1,19 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import BookRecord from '../Books/BookRecord';
-import Col from '../StyledComponents/Col';
-
-const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-`;
 
 export default function SearchResults({ data }) {
   return (
-    <Wrapper>
-      {data &&
-        data.map(book => {
-          return (
-            <Col flex="50%" key={book.id}>
-              <BookRecord book={book} />
-            </Col>
-          );
-        })}
-    </Wrapper>
+    <section className="searchResults">
+      <div className="row">
+        {data &&
+          data.map(book => {
+            return (
+              <div className="col m6 s12" key={book.id}>
+                <BookRecord book={book} />
+              </div>
+            );
+          })}
+      </div>
+    </section>
   );
 }

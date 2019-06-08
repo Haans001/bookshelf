@@ -29,7 +29,7 @@ const theme = {
   },
   mq: {
     tablet: '@media (max-width : 768px)',
-    desktop: '@media (max-width : 1024px)',
+    desktop: '@media (min-width : 1024px)',
     huge: '@media(max-width : 1440px)',
   },
 };

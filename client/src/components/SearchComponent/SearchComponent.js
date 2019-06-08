@@ -1,57 +1,72 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import Wrapper from '../StyledComponents/Wrapper';
-import { StyledH2 } from '../StyledComponents/TextComponents';
-import Button from '../StyledComponents/Button';
 import { API_KEY } from '../../config/keys';
 import SearchResults from './SearchResults';
 
-const StyledHeading = styled(StyledH2)`
-  color: ${({ theme }) => theme.colors.primary};
-  font-weight: ${({ theme }) => theme.fontWeight.bold};
-  letter-spacing: 3px;
-`;
-const StyledWrapper = styled(Wrapper)`
+const StyledWrapper = styled.div`
   padding-top: 130px;
-  display: block;
-`;
-const StyledSearchInput = styled.input`
-  flex: 3;
-  padding: 20px 14px;
-  color: ${({ theme }) => theme.colors.grey};
-  border-radius: 18px 0 0 18px;
-  border: 3px ${({ theme }) => theme.colors.grey} solid;
-  font-size: ${({ theme }) => theme.fontSize.s};
   ${({ theme }) => theme.mq.tablet} {
-    font-size: ${({ theme }) => theme.fontSize.links};
+    padding-top: 80px;
   }
-`;
-const SearchBarWrapper = styled.div`
-  display: flex;
-  align-items: stretch;
-`;
-const InputWrapper = styled.div`
-  display: flex;
-  margin: 20px 0;
-  justify-content: space-evenly;
 
   ${({ theme }) => theme.mq.tablet} {
-    flex-direction: column;
-    align-items: center;
+    button:first-child {
+      width: 100% !important;
+    }
   }
 `;
 
-const StyledLabel = styled.label`
-  margin-right: 10px;
+const StyledSearchField = styled.div`
+  input[type='text']:focus {
+    border-bottom: 1px solid #1a237e !important;
+    box-shadow: 0 1px 0 0 #1a237e !important;
+  }
+  label {
+    z-index: -1;
+  }
+
+  input[type='text']:focus + label {
+    color: #1a237e !important;
+  }
 `;
-const StyledButton = styled(Button)`
-  font-size: ${({ theme }) => theme.fontSize.links} !important;
-  display: block;
-  border: none;
-  border-radius: 0 18px 18px 0;
-  &:hover {
-    cursor: pointer;
+
+const RangeField = styled.div`
+  display: flex;
+  align-items: center;
+  label {
+    margin-right: 10px;
+    font-size: 1rem;
+    transform: translateY(-5px) !important;
+  }
+  p {
+    margin: 0;
+    input[type='range']::-moz-range-thumb {
+      background-color: #1a237e;
+    }
+    span {
+      background-color: #1a237e !important;
+    }
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    justify-content: space-around;
+  }
+`;
+
+const RadioField = styled.div`
+  [type='radio']:checked + span::after,
+  [type='radio'].with-gap:checked + span::after {
+    background-color: #1a237e;
+  }
+  [type='radio']:checked + span::after,
+  [type='radio'].with-gap:checked + span::before,
+  [type='radio'].with-gap:checked + span::after {
+    border-color: #1a237e;
+  }
+  ${({ theme }) => theme.mq.tablet} {
+    display: flex;
+    justify-content: space-around;
   }
 `;
 
@@ -71,6 +86,7 @@ export default class SearchComponent extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { querry, orderBy, maxResults } = this.state;
+    console.log(this.state);
 
     axios
       .get(
@@ -85,61 +101,74 @@ export default class SearchComponent extends Component {
   };
 
   render() {
-    const { maxResults, data } = this.state;
+    const { maxResults, data, querry } = this.state;
 
     return (
-      <StyledWrapper>
-        <StyledHeading>Search for books.</StyledHeading>
+      <StyledWrapper className="container">
+        <h2 className="teal-text teal-accent-3">Search for books...</h2>
+
         <form onSubmit={this.handleSubmit}>
-          <SearchBarWrapper>
-            <StyledSearchInput
-              type="text"
-              id="querry"
-              required
-              placeholder="Type in title, author, category..."
-              onChange={this.handleChange}
-            />
-            <StyledButton as="button" type="submit" primary>
-              Search <i className="fas fa-search" />
-            </StyledButton>
-          </SearchBarWrapper>
-          <InputWrapper>
-            <StyledLabel>
+          <div className="row">
+            <StyledSearchField className="col m10 s12 input-field">
               <input
-                checked
-                name="group"
-                type="radio"
-                id="orderBy"
-                value="relevance"
+                // placeholder="Search for title,author,cathegory..."
+                id="querry"
+                type="text"
+                className="validate"
                 onChange={this.handleChange}
+                value={querry}
               />
-              Order By Relevance
-            </StyledLabel>
-            <StyledLabel>
-              <input
-                name="group"
-                type="radio"
-                id="orderBy"
-                value="newest"
-                onChange={this.handleChange}
-              />
-              Order By Newest
-            </StyledLabel>
-            <div>
-              <span>{maxResults}</span>
-              <input
-                type="range"
-                id="maxResults"
-                value={maxResults}
-                min="10"
-                name="maxResults"
-                max="40"
-                onChange={this.handleChange}
-                step="1"
-              />
-              <label htmlFor="maxResults">Max Results</label>
+              <label htmlFor="search">Search</label>
+            </StyledSearchField>
+            <div className="col m2 s12 ">
+              <button
+                className=" z-depth-5 btn waves-effect indigo darken-4 btn-large"
+                type="submit"
+              >
+                Search <i className="material-icons">search</i>
+              </button>
             </div>
-          </InputWrapper>
+          </div>
+          <div className="row">
+            <RadioField className="col m7 s12">
+              <label>
+                <input
+                  name="group"
+                  id="orderBy"
+                  type="radio"
+                  value="relevance"
+                  checked
+                  onChange={this.handleChange}
+                />
+                <span>Search by relevance</span>
+              </label>
+              <label>
+                <input
+                  name="group"
+                  id="orderBy"
+                  type="radio"
+                  value="newest"
+                  onChange={this.handleChange}
+                />
+                <span>Search by newest</span>
+              </label>
+            </RadioField>
+            <RangeField className="col m5 s12">
+              <label htmlFor="maxResults">
+                <span>Number of Results</span>
+              </label>
+              <p className="range-field">
+                <input
+                  type="range"
+                  id="maxResults"
+                  value={maxResults}
+                  min="0"
+                  max="100"
+                  onChange={this.handleChange}
+                />
+              </p>
+            </RangeField>
+          </div>
         </form>
         <SearchResults data={data} />
       </StyledWrapper>

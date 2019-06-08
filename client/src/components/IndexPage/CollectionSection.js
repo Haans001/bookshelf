@@ -18,6 +18,8 @@ const StyledImage = styled.img`
   ${({ theme }) => theme.mq.tablet} {
     margin-top: 50px;
     position: initial;
+    width: 100%;
+    transform: translateY(-4rem);
   }
 `;
 
@@ -44,13 +46,19 @@ export default function CollectionSection() {
             </StyledParagraph>
             <Link
               to="/"
-              className=" z-depth-5 btn waves-effect indigo darken-4 btn-large"
+              className=" hide-on-med-and-down z-depth-5 btn waves-effect indigo darken-4 btn-large"
             >
               Create Collection <i className="material-icons">add</i>
             </Link>
           </div>
           <div className="col s12 m6">
             <StyledImage className="z-depth-5" src={CollectionImage} alt="" />
+            <Link
+              to="/"
+              className=" hide-on-med-and-up z-depth-5 btn waves-effect indigo darken-4 btn-large"
+            >
+              Create Collection <i className="material-icons">add</i>
+            </Link>
           </div>
         </div>
       </div>
