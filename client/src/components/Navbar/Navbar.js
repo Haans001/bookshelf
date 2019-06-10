@@ -33,10 +33,13 @@ export default function Navbar() {
           Bookphiles <i className="fas fa-book-open" />
         </Link>
         <NavLinks />
-        <a href="#" data-target="mobile-demo" className="right sidenav-trigger">
-          <i className="material-icons" onClick={toogleMenu}>
-            menu
-          </i>
+        <a
+          href="#"
+          data-target="mobile-demo"
+          onClick={toogleMenu}
+          className="right sidenav-trigger"
+        >
+          <i className="material-icons">menu</i>
         </a>
       </div>
       <MobileNavLinks />
