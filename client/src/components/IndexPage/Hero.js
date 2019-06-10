@@ -9,6 +9,8 @@ const StyledWrapper = styled.div`
 
   ${({ theme }) => theme.mq.tablet} {
     padding-top: 80px;
+    height: auto;
+    padding-bottom: 50px;
   }
 `;
 
@@ -32,6 +34,7 @@ const StyledSection = styled.section`
     url(${img});
   background-attachment: fixed;
   background-repeat: no-repeat;
+  background-position: bottom;
   background-size: cover;
 `;
 
@@ -39,7 +42,7 @@ export default function Hero() {
   return (
     <StyledSection>
       <StyledWrapper className="container center">
-        <h5 className="grey-text grey-lighten-2">
+        <h5 className="grey-text grey-lighten-2 hide-on-med-and-down">
           FREE BOOKSHELF FOR EVERY BOOKFHILE
         </h5>
         <StyledH2 className="white-text">

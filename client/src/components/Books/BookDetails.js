@@ -84,7 +84,7 @@ class BookDetails extends Component {
                   <StarRating
                     rating={2.403}
                     numberOfStars={5}
-                    starDimension="16px"
+                    starDimension="25px"
                     starRatedColor="#f39c12"
                   />
                 </div>
