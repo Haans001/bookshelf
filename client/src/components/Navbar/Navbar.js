@@ -16,7 +16,8 @@ const StyledNav = styled.nav`
 export default function Navbar() {
   const [isOpen, open] = useState(true);
 
-  const toogleMenu = () => {
+  const toogleMenu = e => {
+    e.preventDefault();
     if (isOpen) {
       $('#mobile-nav').slideDown();
     } else {
@@ -40,19 +41,5 @@ export default function Navbar() {
       </div>
       <MobileNavLinks />
     </StyledNav>
-    // <StyledHeader>
-    //   <StyledWrapper>
-    //     <StyledLink to="/">
-    //       <StyledHeading>
-    //         Bookphiles <i className="fas fa-book-open" />
-    //       </StyledHeading>
-    //     </StyledLink>
-    //     <nav>
-    //       <NavLinks />
-    //     </nav>
-    //
-    //   </StyledWrapper>
-    //
-    // </StyledHeader>
   );
 }

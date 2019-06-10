@@ -18,11 +18,11 @@ const theme = {
     firaSans: 'fira-sans, sans-serif;',
   },
   colors: {
-    grey: '#636262',
-    lightGrey: '#ACACAC',
-    lighterGrey: '#F2F2F2',
-    primary: '#1ABC9C',
-    secondary: '#05C46B',
+    grey: '#9e9e9e',
+    lightGrey: '#bdbdbd',
+    lighterGrey: '#e0e0e0 ',
+    primary: '#00bfa5',
+    secondary: '#1a237e',
     white: '#fff',
     black: '#000',
     blue: '#34495e',
@@ -30,7 +30,7 @@ const theme = {
   mq: {
     tablet: '@media (max-width : 768px)',
     desktop: '@media (min-width : 1024px)',
-    huge: '@media(max-width : 1440px)',
+    huge: '@media(min-width : 1440px)',
   },
 };
 

@@ -17,6 +17,7 @@ const StyledCard = styled.div`
   padding: 15px;
 
   ${({ theme }) => theme.mq.tablet} {
+    height: auto;
     h4 {
       font-size: 1.5rem;
     }
@@ -27,7 +28,7 @@ const StyledCard = styled.div`
 
 const StyledRecordInfo = styled.div`
   ${({ theme }) => theme.mq.tablet} {
-    padding-left: 60px !important;
+    padding-left: 80px !important;
   }
 `;
 
@@ -56,30 +57,12 @@ export default function BookRecord({ book }) {
             <StarRating
               rating={2.403}
               numberOfStars={5}
-              starDimension="20px"
+              starDimension="16px"
               starRatedColor="#f39c12"
             />
           </StyledRecordInfo>
         </div>
       </StyledCard>
     </StyledLink>
-    // <Wrapper as={StyledLink} to={`/search/${book.id}`}>
-    //   <ImageContainer>
-    //     <img src={book.volumeInfo.imageLinks.thumbnail} alt="" />
-    //   </ImageContainer>
-    //   <InfoWrapper>
-    //     <StyledTitle>{book.volumeInfo.title}</StyledTitle>
-    //     <StyledSubtitle>{book.volumeInfo.subtitle}</StyledSubtitle>
-    //     <StyledAuthor>
-    //       {book.volumeInfo.authors && book.volumeInfo.authors[0]}
-    //     </StyledAuthor>
-    //     <StarRating
-    //       rating={2.403}
-    //       numberOfStars={5}
-    //       starDimension="20px"
-    //       starRatedColor="#f39c12"
-    //     />
-    //   </InfoWrapper>
-    // </Wrapper>
   );
 }
