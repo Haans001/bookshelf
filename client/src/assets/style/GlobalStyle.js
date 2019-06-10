@@ -8,10 +8,12 @@ const GlobalStyle = createGlobalStyle`
     -mos-osx-font-smoothing  : grayscale;
 
 }
-body {
-    font-family :'Lato', sans-serif;
+body,html {
+    font-family :'fira-sans', sans-serif;
+    /* font-family :'Lato', sans-serif; */
     padding : 0;
     margin  :0;  
+    height : 100%;
 }
 
 `;

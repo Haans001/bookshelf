@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import axios from 'axios';
-import { API_KEY } from '../../config/keys';
 import SearchResults from './SearchResults';
 import { searchBooks } from '../../store/actions/searchAction';
 
@@ -87,20 +85,8 @@ class SearchComponent extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { querry, orderBy, maxResults } = this.state;
     const { search } = this.props;
-
     search(this.state);
-
-    axios
-      .get(
-        `https://www.googleapis.com/books/v1/volumes?q=${querry}&orderBy=${orderBy}&maxResults=${maxResults}&key=${API_KEY}`
-      )
-      .then(resp => {
-        this.setState({
-          data: resp.data.items,
-        });
-      });
   };
 
   render() {
@@ -114,7 +100,7 @@ class SearchComponent extends Component {
           <div className="row">
             <StyledSearchField className="col m10 s12 input-field">
               <input
-                // placeholder="Search for title,author,cathegory..."
+                required
                 id="querry"
                 type="text"
                 className="validate"
@@ -140,7 +126,7 @@ class SearchComponent extends Component {
                   id="orderBy"
                   type="radio"
                   value="relevance"
-                  checked
+                  defaultChecked
                   onChange={this.handleChange}
                 />
                 <span>Search by relevance</span>
@@ -179,16 +165,11 @@ class SearchComponent extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  results: state.search.SearchResults,
-  error: state.search.searchError,
-});
-
 const mapDispatchToProps = dispatch => ({
   search: state => dispatch(searchBooks(state)),
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(SearchComponent);

@@ -1,14 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import BookRecord from '../Books/BookRecord';
 
-export default function SearchResults({ data }) {
+function SearchResults({ data }) {
   return (
     <section className="searchResults">
       <div className="row">
         {data &&
-          data.map(book => {
+          data.map((book, index) => {
             return (
-              <div className="col m6 s12" key={book.id}>
+              <div className="col m6 s12" key={index}>
                 <BookRecord book={book} />
               </div>
             );
@@ -17,3 +18,10 @@ export default function SearchResults({ data }) {
     </section>
   );
 }
+const mapStateToProps = state => ({
+  data: state.search.searchResults,
+});
+export default connect(
+  mapStateToProps,
+  null
+)(SearchResults);

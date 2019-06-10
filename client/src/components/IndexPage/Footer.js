@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
   padding: 50px 0;
+  background-attachment: fixed;
 `;
 const StyledArticle = styled.article`
   display: flex;
