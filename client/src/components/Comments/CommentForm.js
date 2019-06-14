@@ -10,7 +10,7 @@ const StyledTextArea = styled.textarea`
   min-height: 10rem !important;
 `;
 
-export default class NameCommentForm extends Component {
+export default class CommentForm extends Component {
   constructor() {
     super();
     this.changeRating = this.changeRating.bind(this);

@@ -46,7 +46,7 @@ export default function CollectionSection() {
             </StyledParagraph>
             <Link
               to="/"
-              className=" hide-on-med-and-down z-depth-5 btn waves-effect indigo darken-4 btn-large"
+              className=" hide-on-med-and-down z-depth-5 indigo darken-4 btn-large"
             >
               Create Collection <i className="material-icons">add</i>
             </Link>
@@ -55,7 +55,7 @@ export default function CollectionSection() {
             <StyledImage className="z-depth-5" src={CollectionImage} alt="" />
             <Link
               to="/"
-              className=" hide-on-med-and-up z-depth-5 btn waves-effect indigo darken-4 btn-large"
+              className=" hide-on-med-and-up z-depth-5 indigo darken-4 btn-large"
             >
               Create Collection <i className="material-icons">add</i>
             </Link>
@@ -63,27 +63,5 @@ export default function CollectionSection() {
         </div>
       </div>
     </StyledSection>
-    // <StyledWrapper>
-    //   <Col flex={1}>
-    //     <StyledDiv>
-    //       <StyledHeading>
-    //         Organize your book collection like a real bookshelf.{' '}
-    //       </StyledHeading>
-    //       <StyledParagraph>
-    //         Choose your titles and categories. <br /> Create professional
-    //         bookshelf
-    //         <br /> if you’ll love, in just a few clicks
-    //       </StyledParagraph>
-    //       <StyledButton as={Link} to="/">
-    //         Create Collection <i className="fas fa-arrow-right" />
-    //       </StyledButton>
-    //     </StyledDiv>
-    //   </Col>
-    //   <Col flex={1}>
-    //     <StyledDiv>
-    //       <StyledImage src={CollectionImage} alt="" />
-    //     </StyledDiv>
-    //   </Col>
-    // </StyledWrapper>
   );
 }

@@ -36,10 +36,13 @@ export default function MobileNavLinks() {
         </li>
         {/* Signed out links */}
         <li>
-          <NavLink to="/">Sign In</NavLink>
+          <NavLink to="/signin">Sign In</NavLink>
         </li>
         <li>
-          <NavLink to="/" className="btn waves-effect red lighten-2 btn-large">
+          <NavLink
+            to="/signup"
+            className="btn waves-effect red lighten-2 btn-large"
+          >
             Sign Up
           </NavLink>
         </li>

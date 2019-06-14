@@ -5,7 +5,7 @@ import GlobalStyle from '../assets/style/GlobalStyle';
 import theme from '../assets/style/theme';
 import Store from '../store/Store';
 
-const MainTemplate = ({ children }) => {
+function MainTemplate({ children }) {
   return (
     <React.Fragment>
       <Store>
@@ -17,6 +17,6 @@ const MainTemplate = ({ children }) => {
       </Store>
     </React.Fragment>
   );
-};
+}
 
 export default MainTemplate;

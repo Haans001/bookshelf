@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import React from 'react';
 
-const SEO = () => {
+function SEO() {
   return (
     <Helmet>
       <meta charSet="utf-8" />
@@ -21,6 +21,6 @@ const SEO = () => {
       <link rel="stylesheet" href="https://use.typekit.net/fio3cwu.css" />
     </Helmet>
   );
-};
+}
 
 export default SEO;

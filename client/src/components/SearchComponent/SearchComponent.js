@@ -17,20 +17,6 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledSearchField = styled.div`
-  input[type='text']:focus {
-    border-bottom: 1px solid #1a237e !important;
-    box-shadow: 0 1px 0 0 #1a237e !important;
-  }
-  label {
-    z-index: -1;
-  }
-
-  input[type='text']:focus + label {
-    color: #1a237e !important;
-  }
-`;
-
 const RangeField = styled.div`
   display: flex;
   align-items: center;
@@ -98,7 +84,7 @@ class SearchComponent extends Component {
 
         <form onSubmit={this.handleSubmit}>
           <div className="row">
-            <StyledSearchField className="col m10 s12 input-field">
+            <div className="col m10 s12 input-field text-field">
               <input
                 required
                 id="querry"
@@ -108,7 +94,7 @@ class SearchComponent extends Component {
                 value={querry}
               />
               <label htmlFor="search">Search</label>
-            </StyledSearchField>
+            </div>
             <div className="col m2 s12 ">
               <button
                 className=" z-depth-5 btn waves-effect indigo darken-4 btn-large"

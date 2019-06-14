@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import StarRating from 'react-star-ratings';
-import Comments from './Comments';
-import CommentForm from './CommentForm';
+import Comments from '../Comments/Comments';
+import CommentForm from '../Comments/CommentForm';
 import BookNavigation from './BookNavigation';
 
 const StyledWrapper = styled.div`
@@ -52,10 +52,7 @@ class BookDetails extends Component {
     const description = book ? book.volumeInfo.description : null;
 
     return book ? (
-      <StyledWrapper
-        className="container"
-        // dangerouslySetInnerHTML={{ __html: description }}
-      >
+      <StyledWrapper className="container">
         <StyledCard className="card">
           <div className="row">
             <div className="col m9 s12">
@@ -70,7 +67,7 @@ class BookDetails extends Component {
                     {book.volumeInfo.title}. {book.volumeInfo.subtitle}
                   </StyledTitle>
                   <h6>
-                    <span className="grey-text text-lighten1">Authors: </span>
+                    <span className="grey-text text-lighten-1">Authors: </span>
                     {book.volumeInfo.authors
                       ? book.volumeInfo.authors.map(author => {
                           return `${author}\u00A0\u00A0\u00A0`;
@@ -78,7 +75,7 @@ class BookDetails extends Component {
                       : 'Unknown'}
                   </h6>
                   <h6>
-                    <span className="grey-text text-lighten1">Pages: </span>
+                    <span className="grey-text text-lighten-1">Pages: </span>
                     {book.volumeInfo.pageCount}
                   </h6>
                   <StarRating
