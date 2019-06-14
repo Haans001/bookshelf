@@ -18,14 +18,15 @@ const theme = {
     firaSans: 'fira-sans, sans-serif;',
   },
   colors: {
-    grey: '#9e9e9e',
-    lightGrey: '#bdbdbd',
-    lighterGrey: '#e0e0e0 ',
-    primary: '#00bfa5',
-    secondary: '#1a237e',
+    grey: '#9e9e9e', // grey
+    lightGrey: '#bdbdbd', // grey lighten-1
+    lighterGrey: '#e0e0e0 ', // grey lighten-2
+    primary: '#00bfa5', //  teal accent-4
+    secondary: '#1a237e', // indigo darken-4
     white: '#fff',
     black: '#000',
     blue: '#34495e',
+    important: '#E57373', // red lighten-2
   },
   mq: {
     tablet: '@media (max-width : 768px)',

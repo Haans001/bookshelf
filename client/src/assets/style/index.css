@@ -11,6 +11,34 @@ input.valid[type='text']:not(.browser-default) {
   box-shadow: 0 1px 0 0 #1a237e;
 }
 
+/* .search-field [type='radio']:checked + span::after,
+.search-field [type='radio'].with-gap:checked + span::after {
+  background-color: #1a237e;
+}
+.search-field [type='radio']:checked + span::after,
+.search-field [type='radio'].with-gap:checked + span::before,
+.search-field [type='radio'].with-gap:checked + span::after {
+  border-color: #1a237e;
+}
+
+@media (max-width: 768px) {
+  .search-field {
+    display: flex;
+    justify-content: space-around;
+  }
+} */
 /* html {
   scroll-behavior: smooth;
 } */
+
+.text-field input[type='text']:focus,
+.text-field input[type='password']:focus {
+  border-bottom: 1px solid #1a237e !important;
+  box-shadow: 0 1px 0 0 #1a237e !important;
+  z-index: -1;
+}
+
+.text-field input[type='text']:focus + label,
+.text-field input[type='password']:focus + label {
+  color: #1a237e !important;
+}

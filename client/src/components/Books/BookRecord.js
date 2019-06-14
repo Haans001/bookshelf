@@ -35,7 +35,6 @@ const StyledRecordInfo = styled.div`
 const StyledAuthor = styled.h2`
   font-weight: ${({ theme }) => theme.fontWeight.regular};
   font-size: ${({ theme }) => theme.fontSize.links};
-  color: ${({ theme }) => theme.colors.grey};
 `;
 
 export default function BookRecord({ book }) {
@@ -51,7 +50,7 @@ export default function BookRecord({ book }) {
           <StyledRecordInfo className="col s9">
             <h4>{book.volumeInfo.title}</h4>
             <h5>{book.volumeInfo.title ? book.volumeInfo.title : 'Unknown'}</h5>
-            <StyledAuthor>
+            <StyledAuthor className="grey-text grey-text text-lighten-1">
               {book.volumeInfo.authors ? book.volumeInfo.authors[0] : 'Unknown'}
             </StyledAuthor>
             <StarRating
