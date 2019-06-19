@@ -1,5 +1,21 @@
 const express = require("express");
 const app = express();
+const path = require("path");
+const mongoose = require("mongoose");
+const { mongoURI } = require("./config/config.js");
+
+mongoose
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    dbName: "bookshelf"
+  })
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
+
+app.use(express.json());
+
+app.use("/auth", require("./routes/auth"));
 
 if (process.env.NODE_ENV === "production") {
   // Set static folder
@@ -10,4 +26,4 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(process.env.PORT || 5000, () => `Server running on port`);
+app.listen(process.env.PORT || 5000, () => console.log("server running"));

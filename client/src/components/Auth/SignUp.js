@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { signUp } from '../../store/actions/authAction';
 
 const StyledCard = styled.div`
   max-width: 700px;
@@ -26,7 +29,7 @@ const StyledHeading = styled.h4`
   font-weight: ${({ theme }) => theme.fontWeight.bold};
 `;
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -48,10 +51,14 @@ export default class SignUp extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    const { signUp } = this.props;
+    signUp(this.state);
   }
 
   render() {
+    const { msg, isAuthenticated } = this.props;
+
+    if (isAuthenticated) return <Redirect to="/" />;
     return (
       <StyledWrapper className="container">
         <StyledCard className="card text-field">
@@ -110,8 +117,21 @@ export default class SignUp extends Component {
               Create account
             </button>
           </form>
+          {msg ? <p className="center red-text">{msg}</p> : null}
         </StyledCard>
       </StyledWrapper>
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  signUp: state => dispatch(signUp(state)),
+});
+const mapStateToProps = state => ({
+  msg: state.auth.error,
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);
