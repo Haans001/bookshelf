@@ -3,9 +3,8 @@ const { jwtSecret } = require("../config/config");
 
 function auth(req, res, next) {
   const token = req.header("x-auth-token");
-
   // Check for token
-  if (!token) return res.status(401).json({ msg: "Your session Expired" });
+  if (!token) return res.status(401).json({ errors: "" });
 
   try {
     // Verify token
@@ -14,7 +13,7 @@ function auth(req, res, next) {
     req.user = decoded;
     next();
   } catch (e) {
-    res.status(400).json({ msg: "Your session Expired" });
+    return res.status(400);
   }
 }
 

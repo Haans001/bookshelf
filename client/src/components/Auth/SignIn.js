@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
+import { signIn } from '../../store/actions/authAction';
 
 const StyledWrapper = styled.div`
   padding-top: 130px;
@@ -35,7 +37,8 @@ const StyledCheck = styled.label`
     border-bottom: 2px solid ${({ theme }) => theme.colors.secondary};
   }
 `;
-export default class SignIn extends Component {
+
+class SignIn extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -43,7 +46,7 @@ export default class SignIn extends Component {
   }
 
   state = {
-    userName: '',
+    email: '',
     password: '',
   };
 
@@ -55,13 +58,18 @@ export default class SignIn extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    const { signIn } = this.props;
+    signIn(this.state);
   }
 
   render() {
+    const { errors, isAuthenticated } = this.props;
+
+    if (isAuthenticated) return <Redirect to="/" />;
+
     return (
       <StyledWrapper>
-        <StyledCard className="card text-field">
+        <StyledCard className="card secondary-input-field ">
           <StyledHeading className="center teal-text text-accent-4">
             Login
           </StyledHeading>
@@ -69,12 +77,12 @@ export default class SignIn extends Component {
             <div className="row">
               <div className="col s12 input-field ">
                 <input
-                  id="userName"
-                  type="text"
+                  id="email"
+                  type="email"
                   className="validate"
                   onChange={this.handleChange}
                 />
-                <label htmlFor="userName">User Name</label>
+                <label htmlFor="email">Email</label>
               </div>
             </div>
             <div className="row">
@@ -94,7 +102,9 @@ export default class SignIn extends Component {
                 <span>Remember Me</span>
               </StyledCheck>
 
-              <StyledLink className="right">Forgot a password?</StyledLink>
+              <StyledLink to="/" className="right">
+                Forgot a password?
+              </StyledLink>
             </p>
             <button
               type="submit"
@@ -110,8 +120,27 @@ export default class SignIn extends Component {
               now!
             </p>
           </form>
+          {errors
+            ? errors.map(error => (
+                <p key={error.param} className="center red-text">
+                  {error.msg}
+                </p>
+              ))
+            : null}
         </StyledCard>
       </StyledWrapper>
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  signIn: state => dispatch(signIn(state)),
+});
+const mapStateToProps = state => ({
+  errors: state.auth.errors,
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);
