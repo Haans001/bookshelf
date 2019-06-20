@@ -47,8 +47,8 @@ export default class CommentForm extends Component {
   render() {
     const { rating, body } = this.state;
     return (
-      <StyledWrapper>
-        <h5 className="teal-text teal-accent-3">
+      <StyledWrapper className="secondary-input-field">
+        <h5 className="teal-text  teal-accent-3">
           Add a comment <i className="material-icons">create</i>
         </h5>
 

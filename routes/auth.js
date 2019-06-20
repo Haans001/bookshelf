@@ -4,11 +4,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../config/config.js");
 const auth = require("../middleware/auth");
-
+const { validationResult } = require("express-validator");
+const { loginValidation } = require("../middleware/validation");
 //User model
 const User = require("../models/User");
 
-// @route   POST api/users
+// @route   POST auth/signup
 // @desc    Register new user
 // @access  Public
 router.post("/signup", (req, res) => {
@@ -61,23 +62,28 @@ router.post("/signup", (req, res) => {
   });
 });
 
-router.post("/signin", (req, res) => {
+// @route   POST auth/signin
+// @desc    Login a user
+// @access  Public
+router.post("/signin", loginValidation, (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password)
-    return res.status(400).json({ msg: "Please enter all fields" });
+  const erros = validationResult(req);
+  if (!erros.isEmpty()) {
+    console.log(erros.array());
+    return res.status(400).json({ errors: erros.array() });
+  }
 
   User.findOne({ email }).then(user => {
     if (!user) return res.status(400).json({ msg: "User does not exists" });
 
     bcrypt.compare(password, user.password).then(isMatching => {
       if (!isMatching) return res.status(400).json({ msg: "Invalid password" });
-
       jwt.sign(
         { id: user.id },
         jwtSecret,
         { expiresIn: 3600 },
-        ({ err, token }) => {
+        (err, token) => {
           if (err) throw err;
           res.status(200).json({
             token,
@@ -96,7 +102,7 @@ router.post("/signin", (req, res) => {
 router.get("/user", auth, (req, res) => {
   User.findById(req.user.id)
     .select("-password")
-    .then(user => res.status(200).json(user));
+    .then(user => res.status(200).json({ user }));
 });
 
 module.exports = router;

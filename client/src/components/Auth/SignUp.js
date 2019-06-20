@@ -59,9 +59,10 @@ class SignUp extends Component {
     const { msg, isAuthenticated } = this.props;
 
     if (isAuthenticated) return <Redirect to="/" />;
+
     return (
       <StyledWrapper className="container">
-        <StyledCard className="card text-field">
+        <StyledCard className="card secondary-input-field">
           <StyledHeading className="center teal-text text-accent-4">
             Create a free account
           </StyledHeading>

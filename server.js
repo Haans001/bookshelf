@@ -15,6 +15,7 @@ mongoose
 
 app.use(express.json());
 
+// routes
 app.use("/auth", require("./routes/auth"));
 
 if (process.env.NODE_ENV === "production") {
