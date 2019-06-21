@@ -28,3 +28,13 @@ input.valid[type='text']:not(.browser-default) {
   border-bottom: 1px solid #1a237e !important;
   box-shadow: 0 1px 0 0 #1a237e !important;
 }
+
+.padding {
+  padding-top: 130px;
+}
+
+@media (max-width: 768px) {
+  .padding {
+    padding-top: 70px;
+  }
+}

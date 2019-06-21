@@ -8,9 +8,7 @@ function auth(req, res, next) {
 
   try {
     // Verify token
-    const decoded = jwt.verify(token, jwtSecret);
-    // Add user from payload
-    req.user = decoded;
+    req.user = jwt.verify(token, jwtSecret);
     next();
   } catch (e) {
     return res.status(400).json({ errors: "Invalid token" });

@@ -21,8 +21,6 @@ const StyledCard = styled.div`
     h4 {
       font-size: 1.5rem;
     }
-    h3 {
-    }
   }
 `;
 

@@ -10,9 +10,7 @@ const Book = require("../models/Book");
 // @access  Private
 router.post("/submit_comment", auth, (req, res) => {
   const { book_id } = req.body;
-
   Book.findById(book_id).exec((err, book) => {
-    console.log(req.body);
     if (err) throw err;
     // Creating a new book in DB if it didnt found record with served id
     if (!book) {
@@ -34,15 +32,12 @@ router.post("/submit_comment", auth, (req, res) => {
 });
 
 function saveComment(book, comment) {
-  book.comments.push({
-    ...comment
-  });
-  book.ratings.push(rating);
-  // console.log(book);
+  book.comments.push({ ...comment });
+  book.ratings.push(comment.rating);
   book.calculatedRating =
     book.ratings.length > 1
       ? book.ratings.reduce((a, b) => a + b) / book.ratings.length
-      : rating;
+      : comment.rating;
 
   book.save();
 }
@@ -59,7 +54,7 @@ router.get("/get/:book_id", (req, res) => {
       fetch(`https://www.googleapis.com/books/v1/volumes/${book_id}`)
         .then(data => data.json())
         .then(jsonData => {
-          jsonData["bookphiles_api"] = book;
+          jsonData["comments"] = book;
           return res.status(200).json(jsonData);
         });
     });

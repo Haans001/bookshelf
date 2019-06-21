@@ -4,15 +4,6 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { signIn } from '../../store/actions/authAction';
 
-const StyledWrapper = styled.div`
-  padding-top: 130px;
-  ${({ theme }) => theme.mq.tablet} {
-    padding-top: 100px;
-  }
-  button {
-    width: 100%;
-  }
-`;
 const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.grey};
   &:hover {
@@ -23,9 +14,13 @@ const StyledCard = styled.div`
   max-width: 700px;
   margin: 0 auto !important;
   padding: 30px;
-
+  button {
+    width: 100%;
+  }
   ${({ theme }) => theme.mq.tablet} {
     width: 100%;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
   }
 `;
 const StyledHeading = styled.h4`
@@ -39,28 +34,22 @@ const StyledCheck = styled.label`
 `;
 
 class SignIn extends Component {
-  constructor() {
-    super();
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
   state = {
     email: '',
     password: '',
   };
 
-  handleChange(e) {
+  handleChang = e => {
     this.setState({
       [e.target.id]: e.target.value,
     });
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     const { signIn } = this.props;
     signIn(this.state);
-  }
+  };
 
   render() {
     const { errors, isAuthenticated } = this.props;
@@ -68,7 +57,7 @@ class SignIn extends Component {
     if (isAuthenticated) return <Redirect to="/" />;
 
     return (
-      <StyledWrapper>
+      <div className="padding">
         <StyledCard className="card secondary-input-field ">
           <StyledHeading className="center teal-text text-accent-4">
             Login
@@ -128,7 +117,7 @@ class SignIn extends Component {
               ))
             : null}
         </StyledCard>
-      </StyledWrapper>
+      </div>
     );
   }
 }

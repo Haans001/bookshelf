@@ -7,12 +7,6 @@ import Comments from '../Comments/Comments';
 import CommentForm from '../Comments/CommentForm';
 import BookNavigation from './BookNavigation';
 
-const StyledWrapper = styled.div`
-  padding-top: 130px;
-  ${({ theme }) => theme.mq.tablet} {
-    padding-top: 80px;
-  }
-`;
 const StyledCard = styled.div`
   padding: 25px;
   ${({ theme }) => theme.mq.tablet} {
@@ -57,7 +51,7 @@ class BookDetails extends Component {
     const description = book ? book.volumeInfo.description : null;
     const { user } = this.props;
     return book ? (
-      <StyledWrapper className="container">
+      <div className="container padding">
         <StyledCard className="card">
           <div className="row">
             <div className="col m9 s12">
@@ -119,7 +113,7 @@ class BookDetails extends Component {
             </div>
           </div>
         </StyledCard>
-      </StyledWrapper>
+      </div>
     ) : null;
   }
 }

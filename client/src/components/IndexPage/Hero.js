@@ -4,11 +4,8 @@ import styled from 'styled-components';
 import img from '../../assets/images/hero-bg.jpg';
 
 const StyledWrapper = styled.div`
-  padding-top: 130px;
   height: 100vh;
-
   ${({ theme }) => theme.mq.tablet} {
-    padding-top: 80px;
     height: auto;
     padding-bottom: 50px;
   }
@@ -40,7 +37,7 @@ const StyledSection = styled.section`
 
 export default function Hero() {
   return (
-    <StyledSection>
+    <StyledSection className="padding">
       <StyledWrapper className="container center">
         <h5 className="grey-text grey-lighten-2 hide-on-med-and-down">
           FREE BOOKSHELF FOR EVERY BOOKFHILE

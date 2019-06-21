@@ -49,7 +49,7 @@ router.post("/signup", (req, res) => {
                 token,
                 user: {
                   id: user.id,
-                  name: user.userName,
+                  userNname: user.userName,
                   email: user.email
                 }
               });
@@ -82,7 +82,7 @@ router.post("/signin", loginValidation, (req, res) => {
             token,
             user: {
               id: user.id,
-              name: user.userName,
+              userName: user.userName,
               email: user.email
             }
           });
