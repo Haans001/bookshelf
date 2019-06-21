@@ -13,6 +13,7 @@ export default function(state = initState, { type, payload }) {
       localStorage.setItem('token', payload.token);
       return {
         ...state,
+        token: localStorage.getItem('token'),
         isAuthenticated: true,
         user: payload.user,
         errors: null,

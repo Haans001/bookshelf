@@ -17,6 +17,7 @@ app.use(express.json());
 
 // routes
 app.use("/auth", require("./routes/auth"));
+app.use("/books", require("./routes/books"));
 
 if (process.env.NODE_ENV === "production") {
   // Set static folder
