@@ -1,35 +1,11 @@
 .material-icons {
   vertical-align: middle !important;
 }
-/* .input-field input[type='text']:focus {
-  border-bottom: 1px solid #1a237e !important;
-  box-shadow: 0 1px 0 0 #1a237e !important;
-} */
 input.valid[type='text']:not(.browser-default) {
   border-bottom: 1px solid #1a237e;
   -webkit-box-shadow: 0 1px 0 0 #1a237e;
   box-shadow: 0 1px 0 0 #1a237e;
 }
-
-/* .search-field [type='radio']:checked + span::after,
-.search-field [type='radio'].with-gap:checked + span::after {
-  background-color: #1a237e;
-}
-.search-field [type='radio']:checked + span::after,
-.search-field [type='radio'].with-gap:checked + span::before,
-.search-field [type='radio'].with-gap:checked + span::after {
-  border-color: #1a237e;
-}
-
-@media (max-width: 768px) {
-  .search-field {
-    display: flex;
-    justify-content: space-around;
-  }
-} */
-/* html {
-  scroll-behavior: smooth;
-} */
 
 .secondary-input-field input[type='text']:focus,
 .secondary-input-field input[type='password']:focus,
@@ -43,4 +19,12 @@ input.valid[type='text']:not(.browser-default) {
 .secondary-input-field input[type='password']:focus + label,
 .secondary-input-field input[type='email']:focus + label {
   color: #1a237e !important;
+}
+
+.secondary-input-field textarea:focus + label {
+  color: #1a237e !important;
+}
+.secondary-input-field textarea:focus {
+  border-bottom: 1px solid #1a237e !important;
+  box-shadow: 0 1px 0 0 #1a237e !important;
 }

@@ -1,6 +1,7 @@
 const initState = {
   token: localStorage.getItem('token'),
   isAuthenticated: false,
+  isLoading: false,
   user: null,
   errors: null,
 };
@@ -14,7 +15,7 @@ export default function(state = initState, { type, payload }) {
         ...state,
         isAuthenticated: true,
         user: payload.user,
-        error: null,
+        errors: null,
       };
     }
     case 'LOGOUT':
@@ -26,16 +27,24 @@ export default function(state = initState, { type, payload }) {
         ...state,
         token: null,
         isAuthenticated: false,
+        isLoading: false,
         user: null,
         errors: payload.errors,
+      };
+    }
+    case 'USER_LOADING': {
+      return {
+        ...state,
+        isLoading: true,
       };
     }
     case 'USER_LOADED': {
       return {
         ...state,
         isAuthenticated: true,
+        isLoading: false,
         user: payload.user,
-        error: null,
+        errors: null,
       };
     }
 

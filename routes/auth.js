@@ -68,12 +68,6 @@ router.post("/signup", (req, res) => {
 router.post("/signin", loginValidation, (req, res) => {
   const { email, password } = req.body;
 
-  const erros = validationResult(req);
-  if (!erros.isEmpty()) {
-    console.log(erros.array());
-    return res.status(400).json({ errors: erros.array() });
-  }
-
   User.findOne({ email }).then(user => {
     if (!user) return res.status(400).json({ msg: "User does not exists" });
 
@@ -99,6 +93,9 @@ router.post("/signin", loginValidation, (req, res) => {
   });
 });
 
+// @route   GET auth/user
+// @desc    Get a logged user
+// @access  Private
 router.get("/user", auth, (req, res) => {
   User.findById(req.user.id)
     .select("-password")

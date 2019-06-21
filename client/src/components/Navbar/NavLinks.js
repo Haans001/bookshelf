@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signOut } from '../../store/actions/authAction';
 
-function NavLinks(props) {
-  const { isAuthenticated, signOut } = props;
+function NavLinks({ isAuthenticated, signOut }) {
   return (
     <ul className="right hide-on-med-and-down">
       <li>

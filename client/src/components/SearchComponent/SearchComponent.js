@@ -6,11 +6,11 @@ import { searchBooks } from '../../store/actions/searchAction';
 
 const StyledWrapper = styled.div`
   padding-top: 130px;
+  label {
+    z-index: -1;
+  }
   ${({ theme }) => theme.mq.tablet} {
     padding-top: 80px;
-  }
-
-  ${({ theme }) => theme.mq.tablet} {
     button:first-child {
       width: 100% !important;
     }
@@ -84,7 +84,7 @@ class SearchComponent extends Component {
 
         <form onSubmit={this.handleSubmit}>
           <div className="row">
-            <div className="col m10 s12 input-field text-field">
+            <div className="col m10 s12 input-field secondary-input-field">
               <input
                 required
                 id="querry"
