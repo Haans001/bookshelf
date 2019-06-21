@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import $ from 'jquery';
 import StarRating from 'react-star-ratings';
+import { submitComment } from '../../store/actions/commentAction';
 
 const StyledWrapper = styled.div`
   margin-top: 50px;
@@ -10,10 +12,12 @@ const StyledTextArea = styled.textarea`
   min-height: 10rem !important;
 `;
 
-export default class CommentForm extends Component {
+class CommentForm extends Component {
   state = {
-    body: '',
+    book_id: this.props.book_id,
+    userName: this.props.userName,
     rating: 0,
+    body: '',
   };
 
   componentDidMount() {
@@ -28,7 +32,8 @@ export default class CommentForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    const { submitComment } = this.props;
+    submitComment(this.state);
   };
 
   handleChange = e => {
@@ -78,3 +83,11 @@ export default class CommentForm extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  submitComment: comment => dispatch(submitComment(comment)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CommentForm);

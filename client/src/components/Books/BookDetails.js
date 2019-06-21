@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import StarRating from 'react-star-ratings';
+import { connect } from 'react-redux';
 import Comments from '../Comments/Comments';
 import CommentForm from '../Comments/CommentForm';
 import BookNavigation from './BookNavigation';
@@ -45,12 +46,16 @@ class BookDetails extends Component {
         });
       })
       .catch(err => console.log(err));
+
+    axios
+      .get(`/books/get/${match.params.book_id}`)
+      .then(res => console.log(res.data));
   }
 
   render() {
     const { book } = this.state;
     const description = book ? book.volumeInfo.description : null;
-
+    const { user } = this.props;
     return book ? (
       <StyledWrapper className="container">
         <StyledCard className="card">
@@ -98,7 +103,16 @@ class BookDetails extends Component {
                 />
               </StyledRow>
               <Comments />
-              <CommentForm />
+              {user ? (
+                <CommentForm
+                  book_id={this.props.match.params.book_id}
+                  userName={user.userName}
+                />
+              ) : (
+                <h4 className="center teal-text teal-accent-3">
+                  Log in to add comment
+                </h4>
+              )}
             </div>
             <div className="col m3 s12">
               <BookNavigation />
@@ -109,4 +123,7 @@ class BookDetails extends Component {
     ) : null;
   }
 }
-export default BookDetails;
+const mapStateToProps = state => ({
+  user: state.auth.user,
+});
+export default connect(mapStateToProps)(BookDetails);

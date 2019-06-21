@@ -1,17 +1,12 @@
 import axios from 'axios';
 
-export const signUp = ({
-  userName,
-  email,
-  password,
-  repeatPassword,
-}) => dispatch => {
+export const signUp = credentials => dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const body = JSON.stringify({ userName, email, password, repeatPassword });
+  const body = JSON.stringify(credentials);
 
   axios
     .post('/auth/signup', body, config)
@@ -75,14 +70,14 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
-export const signIn = ({ email, password }) => dispatch => {
+export const signIn = credentials => dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify(credentials);
   axios
     .post('/auth/signin', body, config)
     .then(resp => {
