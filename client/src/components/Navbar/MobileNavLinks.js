@@ -19,8 +19,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function MobileNavLinks(props) {
-  const { isAuthenticated, signOut } = props;
+function MobileNavLinks({ isAuthenticated, signOut }) {
   return (
     <StyledWrapper id="mobile-nav" className="teal accent-4 ">
       <ul>

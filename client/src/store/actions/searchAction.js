@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { API_KEY } from '../../config/keys';
 
-export const searchBooks = state => dispatch => {
-  const { querry, orderBy, maxResults } = state;
-
+export const searchBooks = ({ querry, orderBy, maxResults }) => dispatch => {
   axios
     .get(
       `https://www.googleapis.com/books/v1/volumes?q=${querry}&orderBy=${orderBy}&maxResults=${maxResults}&key=${API_KEY}`

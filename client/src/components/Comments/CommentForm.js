@@ -11,13 +11,6 @@ const StyledTextArea = styled.textarea`
 `;
 
 export default class CommentForm extends Component {
-  constructor() {
-    super();
-    this.changeRating = this.changeRating.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
   state = {
     body: '',
     rating: 0,
@@ -27,22 +20,22 @@ export default class CommentForm extends Component {
     $('#textarea1').trigger('autoresize');
   }
 
-  changeRating(newRating) {
+  changeRating = newRating => {
     this.setState({
       rating: newRating,
     });
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-  }
+  };
 
-  handleChange(e) {
+  handleChange = e => {
     this.setState({
       body: e.target.value,
     });
-  }
+  };
 
   render() {
     const { rating, body } = this.state;
