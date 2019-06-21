@@ -12,18 +12,18 @@ router.post("/submit_comment", auth, (req, res) => {
   const { book_id } = req.body;
 
   Book.findById(book_id).exec((err, book) => {
+    console.log(req.body);
     if (err) throw err;
     // Creating a new book in DB if it didnt found record with served id
     if (!book) {
-      const newBook = new Book({
+      new Book({
         _id: book_id
-      });
-      newBook
+      })
         .save()
         .then(book => {
           saveComment(book, req.body);
         })
-        .catch(err => res.status(500).json({ msg: "error" }));
+        .catch(err => res.status(404).json({ msg: "error" }));
     }
     // Adding a comment
     else {
@@ -33,11 +33,9 @@ router.post("/submit_comment", auth, (req, res) => {
   return res.status(200).json(req.body);
 });
 
-function saveComment(book, { userName, rating, body }) {
+function saveComment(book, comment) {
   book.comments.push({
-    userName,
-    rating,
-    body
+    ...comment
   });
   book.ratings.push(rating);
   // console.log(book);
