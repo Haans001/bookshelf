@@ -15,7 +15,7 @@ const StyledTextArea = styled.textarea`
 class CommentForm extends Component {
   state = {
     book_id: this.props.book_id,
-    userName: this.props.userName,
+    userName: this.props.user ? this.props.user.userName : null,
     rating: 0,
     body: '',
   };
@@ -44,41 +44,47 @@ class CommentForm extends Component {
 
   render() {
     const { rating, body } = this.state;
+    const { user } = this.props;
     return (
       <StyledWrapper className="secondary-input-field">
         <h5 className="teal-text  teal-accent-3">
           Add a comment <i className="material-icons">create</i>
         </h5>
-
-        <div className="row">
-          <form className="col s12" onSubmit={this.handleSubmit}>
-            <div className="row">
-              <StarRating
-                rating={rating}
-                numberOfStars={5}
-                changeRating={this.changeRating}
-                starDimension="30px"
-                starHoverColor="#f39c12"
-                starRatedColor="f39c12"
-              />
-              <div className="input-field col s12 card">
-                <StyledTextArea
-                  id="textarea1"
-                  className="materialize-textarea"
-                  onChange={this.handleChange}
-                  value={body}
+        {user ? (
+          <div className="row">
+            <form className="col s12" onSubmit={this.handleSubmit}>
+              <div className="row">
+                <StarRating
+                  rating={rating}
+                  numberOfStars={5}
+                  changeRating={this.changeRating}
+                  starDimension="30px"
+                  starHoverColor="#f39c12"
+                  starRatedColor="f39c12"
                 />
-                <label htmlFor="textarea1">Comment</label>
+                <div className="input-field col s12 card">
+                  <StyledTextArea
+                    id="textarea1"
+                    className="materialize-textarea"
+                    onChange={this.handleChange}
+                    value={body}
+                  />
+                  <label htmlFor="textarea1">Comment</label>
+                </div>
               </div>
-            </div>
-            <button
-              type="submit"
-              className="btn className z-depth-5 btn waves-effect indigo darken-4"
-            >
-              Submit a comment
-            </button>
-          </form>
-        </div>
+              <button
+                type="submit"
+                className="btn className z-depth-5 btn waves-effect indigo darken-4"
+              >
+                Submit a comment
+              </button>
+            </form>
+          </div>
+        ) : (
+          <h4 className="center teal-text teal-accent-3">
+            Log in to add a comment
+          </h4>
+        )}
       </StyledWrapper>
     );
   }

@@ -54,7 +54,13 @@ router.get("/get/:book_id", (req, res) => {
       fetch(`https://www.googleapis.com/books/v1/volumes/${book_id}`)
         .then(data => data.json())
         .then(jsonData => {
-          jsonData["comments"] = book;
+          if (!book) {
+            book = {
+              calculatedRating: 0,
+              comments: null
+            };
+          }
+          jsonData["bookphiles_api"] = book;
           return res.status(200).json(jsonData);
         });
     });

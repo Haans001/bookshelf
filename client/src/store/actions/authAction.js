@@ -76,7 +76,6 @@ export const signIn = credentials => dispatch => {
       'Content-Type': 'application/json',
     },
   };
-
   const body = JSON.stringify(credentials);
   axios
     .post('/auth/signin', body, config)
