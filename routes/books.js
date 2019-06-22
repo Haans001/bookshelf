@@ -10,20 +10,18 @@ const Book = require("../models/Book");
 // @access  Private
 router.post("/submit_comment", auth, (req, res) => {
   const { book_id } = req.body;
-
   Book.findById(book_id).exec((err, book) => {
     if (err) throw err;
     // Creating a new book in DB if it didnt found record with served id
     if (!book) {
-      const newBook = new Book({
+      new Book({
         _id: book_id
-      });
-      newBook
+      })
         .save()
         .then(book => {
           saveComment(book, req.body);
         })
-        .catch(err => res.status(500).json({ msg: "error" }));
+        .catch(err => res.status(404).json({ msg: "error" }));
     }
     // Adding a comment
     else {
@@ -33,18 +31,13 @@ router.post("/submit_comment", auth, (req, res) => {
   return res.status(200).json(req.body);
 });
 
-function saveComment(book, { userName, rating, body }) {
-  book.comments.push({
-    userName,
-    rating,
-    body
-  });
-  book.ratings.push(rating);
-  // console.log(book);
+function saveComment(book, comment) {
+  book.comments.push({ ...comment });
+  book.ratings.push(comment.rating);
   book.calculatedRating =
     book.ratings.length > 1
       ? book.ratings.reduce((a, b) => a + b) / book.ratings.length
-      : rating;
+      : comment.rating;
 
   book.save();
 }
@@ -61,6 +54,12 @@ router.get("/get/:book_id", (req, res) => {
       fetch(`https://www.googleapis.com/books/v1/volumes/${book_id}`)
         .then(data => data.json())
         .then(jsonData => {
+          if (!book) {
+            book = {
+              calculatedRating: 0,
+              comments: null
+            };
+          }
           jsonData["bookphiles_api"] = book;
           return res.status(200).json(jsonData);
         });

@@ -4,22 +4,18 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authAction';
 
+const StyledWrapper = styled.div`
+  width: unset !important;
+`;
 const StyledCard = styled.div`
   max-width: 700px;
   margin: 0 auto !important;
   padding: 30px;
-
   ${({ theme }) => theme.mq.tablet} {
     width: 100%;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
   }
-`;
-
-const StyledWrapper = styled.div`
-  padding-top: 130px;
-  ${({ theme }) => theme.mq.tablet} {
-    padding-top: 100px;
-  }
-
   button {
     width: 100% !important;
   }
@@ -30,12 +26,6 @@ const StyledHeading = styled.h4`
 `;
 
 class SignUp extends Component {
-  constructor() {
-    super();
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
   state = {
     userName: '',
     email: '',
@@ -43,25 +33,23 @@ class SignUp extends Component {
     repeatPassword: '',
   };
 
-  handleChange(e) {
+  handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value,
     });
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     const { signUp } = this.props;
     signUp(this.state);
-  }
+  };
 
   render() {
     const { msg, isAuthenticated } = this.props;
-
     if (isAuthenticated) return <Redirect to="/" />;
-
     return (
-      <StyledWrapper className="container">
+      <StyledWrapper className="container padding">
         <StyledCard className="card secondary-input-field">
           <StyledHeading className="center teal-text text-accent-4">
             Create a free account

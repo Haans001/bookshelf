@@ -16,6 +16,8 @@ body,html {
     height : 100%;
 }
 
+
+
 `;
 
 export default GlobalStyle;

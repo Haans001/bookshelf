@@ -7,12 +7,6 @@ import Comments from '../Comments/Comments';
 import CommentForm from '../Comments/CommentForm';
 import BookNavigation from './BookNavigation';
 
-const StyledWrapper = styled.div`
-  padding-top: 130px;
-  ${({ theme }) => theme.mq.tablet} {
-    padding-top: 80px;
-  }
-`;
 const StyledCard = styled.div`
   padding: 25px;
   ${({ theme }) => theme.mq.tablet} {
@@ -36,28 +30,21 @@ class BookDetails extends Component {
 
   componentWillMount() {
     const { match } = this.props;
-    axios
-      .get(
-        `https://www.googleapis.com/books/v1/volumes/${match.params.book_id}`
-      )
-      .then(data => {
-        this.setState({
-          book: data.data,
-        });
-      })
-      .catch(err => console.log(err));
 
-    axios
-      .get(`/books/get/${match.params.book_id}`)
-      .then(res => console.log(res.data));
+    axios.get(`/books/get/${match.params.book_id}`).then(res => {
+      console.log(res.data);
+      this.setState({
+        book: res.data,
+      });
+      console.log(this.state);
+    });
   }
 
   render() {
     const { book } = this.state;
-    const description = book ? book.volumeInfo.description : null;
-    const { user } = this.props;
+    const { user, match } = this.props;
     return book ? (
-      <StyledWrapper className="container">
+      <div className="container padding">
         <StyledCard className="card">
           <div className="row">
             <div className="col m9 s12">
@@ -84,7 +71,7 @@ class BookDetails extends Component {
                     {book.volumeInfo.pageCount}
                   </h6>
                   <StarRating
-                    rating={2.403}
+                    rating={book.bookphiles_api.calculatedRating}
                     numberOfStars={5}
                     starDimension="25px"
                     starRatedColor="#f39c12"
@@ -99,27 +86,21 @@ class BookDetails extends Component {
                   </span>
                 </h5>
                 <StyledDescription
-                  dangerouslySetInnerHTML={{ __html: description }}
+                  dangerouslySetInnerHTML={{
+                    __html: book.volumeInfo.description,
+                  }}
                 />
               </StyledRow>
-              <Comments />
-              {user ? (
-                <CommentForm
-                  book_id={this.props.match.params.book_id}
-                  userName={user.userName}
-                />
-              ) : (
-                <h4 className="center teal-text teal-accent-3">
-                  Log in to add comment
-                </h4>
-              )}
+              <Comments comments={book.bookphiles_api.comments} />
+
+              <CommentForm book_id={match.params.book_id} userName={user} />
             </div>
             <div className="col m3 s12">
               <BookNavigation />
             </div>
           </div>
         </StyledCard>
-      </StyledWrapper>
+      </div>
     ) : null;
   }
 }

@@ -5,12 +5,10 @@ import SearchResults from './SearchResults';
 import { searchBooks } from '../../store/actions/searchAction';
 
 const StyledWrapper = styled.div`
-  padding-top: 130px;
   label {
     z-index: -1;
   }
   ${({ theme }) => theme.mq.tablet} {
-    padding-top: 80px;
     button:first-child {
       width: 100% !important;
     }
@@ -79,7 +77,7 @@ class SearchComponent extends Component {
     const { maxResults, data, querry } = this.state;
 
     return (
-      <StyledWrapper className="container">
+      <StyledWrapper className="container padding">
         <h2 className="teal-text teal-accent-3">Search for books...</h2>
 
         <form onSubmit={this.handleSubmit}>
