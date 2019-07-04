@@ -30,7 +30,6 @@ export default function(state = initState, { type, payload }) {
         isAuthenticated: false,
         isLoading: false,
         user: null,
-        errors: payload.errors,
       };
     }
     case 'USER_LOADING': {

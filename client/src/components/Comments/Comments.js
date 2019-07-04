@@ -10,7 +10,7 @@ export default function Comments({ comments }) {
       {comments ? (
         <React.Fragment>
           {comments.map(comment => {
-            return <Comment comment={comment} />;
+            return <Comment comment={comment} key={comment.id} />;
           })}
         </React.Fragment>
       ) : (

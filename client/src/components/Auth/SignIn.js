@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { signIn } from '../../store/actions/authAction';
+import Errors from './Errors';
 
 const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.grey};
@@ -102,20 +104,15 @@ class SignIn extends Component {
               Login
             </button>
             <p className="center grey-text ">
-              Not a member?{' '}
-              <Link className="red-text text-lighten-2" to="/">
-                Sign up
-              </Link>{' '}
+              Not a member?
+              <Link className="red-text text-lighten-2" to="/signup">
+                {' '}
+                Sign up{' '}
+              </Link>
               now!
             </p>
           </form>
-          {errors
-            ? errors.map(error => (
-                <p key={error.param} className="center red-text">
-                  {error.msg}
-                </p>
-              ))
-            : null}
+          <Errors errors={errors} />
         </StyledCard>
       </div>
     );
@@ -125,7 +122,7 @@ const mapDispatchToProps = dispatch => ({
   signIn: state => dispatch(signIn(state)),
 });
 const mapStateToProps = state => ({
-  errors: state.auth.errors,
+  errors: state.errors.loginErrors,
   isAuthenticated: state.auth.isAuthenticated,
 });
 
@@ -133,3 +130,13 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SignIn);
+
+SignIn.defaultProps = {
+  errors: [{ msg: '', param: '' }],
+  isAuthenticated: false,
+};
+SignIn.propTypes = {
+  errors: PropTypes.arrayOf(),
+  isAuthenticated: PropTypes.bool,
+  signIn: PropTypes.func,
+};

@@ -4,28 +4,22 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../config/config.js");
 const auth = require("../middleware/auth");
-const { loginValidation } = require("../middleware/validation");
+const {
+  loginValidation,
+  registerValidation
+} = require("../middleware/validation");
 //User model
 const User = require("../models/User");
 
 // @route   POST auth/signup
 // @desc    Register new user
 // @access  Public
-router.post("/signup", (req, res) => {
-  const { userName, email, password, repeatPassword } = req.body;
-
-  if (!userName || !email || !password || !repeatPassword) {
-    return res.status(400).json({ msg: "Please enter all fields" });
-  }
-  if (password !== repeatPassword) {
-    return res.status(400).json({ msg: "Passwords are not equal" });
-  }
+router.post("/signup", registerValidation, (req, res) => {
+  const { userName, email, password } = req.body;
 
   User.findOne({ email }).then(user => {
     if (user)
-      return res
-        .status(400)
-        .json({ msg: "User already exists. Please use diffrent email." });
+      return res.status(400).json(returnErrors("User already exists", "email"));
 
     const newUser = new User({
       userName,
@@ -68,10 +62,16 @@ router.post("/signin", loginValidation, (req, res) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).then(user => {
-    if (!user) return res.status(400).json({ msg: "User does not exists" });
+    if (!user)
+      return res
+        .status(400)
+        .json(returnErrors("User with this email does not exists", "email"));
 
     bcrypt.compare(password, user.password).then(isMatching => {
-      if (!isMatching) return res.status(400).json({ msg: "Invalid password" });
+      if (!isMatching)
+        return res
+          .status(400)
+          .json(returnErrors("Invalid password", "password"));
       jwt.sign(
         { id: user.id },
         jwtSecret,
@@ -101,4 +101,10 @@ router.get("/user", auth, (req, res) => {
     .then(user => res.status(200).json({ user }));
 });
 
+function returnErrors(msg, param) {
+  let obj = {
+    errors: [{ msg, param }]
+  };
+  return obj;
+}
 module.exports = router;

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authAction';
+import Errors from './Errors';
 
 const StyledWrapper = styled.div`
   width: unset !important;
@@ -46,7 +48,7 @@ class SignUp extends Component {
   };
 
   render() {
-    const { msg, isAuthenticated } = this.props;
+    const { errors, isAuthenticated } = this.props;
     if (isAuthenticated) return <Redirect to="/" />;
     return (
       <StyledWrapper className="container padding">
@@ -106,7 +108,7 @@ class SignUp extends Component {
               Create account
             </button>
           </form>
-          {msg ? <p className="center red-text">{msg}</p> : null}
+          <Errors errors={errors} />
         </StyledCard>
       </StyledWrapper>
     );
@@ -116,7 +118,7 @@ const mapDispatchToProps = dispatch => ({
   signUp: state => dispatch(signUp(state)),
 });
 const mapStateToProps = state => ({
-  msg: state.auth.error,
+  errors: state.errors.registerErrors,
   isAuthenticated: state.auth.isAuthenticated,
 });
 
@@ -124,3 +126,13 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SignUp);
+
+SignUp.defaultProps = {
+  errors: [{ msg: '', param: '' }],
+  isAuthenticated: false,
+};
+SignUp.propTypes = {
+  errors: PropTypes.arrayOf(),
+  isAuthenticated: PropTypes.bool,
+  signIn: PropTypes.func,
+};
