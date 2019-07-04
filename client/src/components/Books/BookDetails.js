@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import styled from 'styled-components';
 import StarRating from 'react-star-ratings';
-import { connect } from 'react-redux';
 import Comments from '../Comments/Comments';
 import CommentForm from '../Comments/CommentForm';
 import BookNavigation from './BookNavigation';
@@ -23,55 +23,56 @@ const StyledRow = styled.div`
 const StyledDescription = styled.div`
   font-weight: ${({ theme }) => theme.fontWeight.light};
 `;
+
 class BookDetails extends Component {
   state = {
     book: null,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { match } = this.props;
-
-    axios.get(`/books/get/${match.params.book_id}`).then(res => {
-      console.log(res.data);
-      this.setState({
-        book: res.data,
-      });
-      console.log(this.state);
-    });
+    axios
+      .get(`/books/get/${match.params.book_id}`)
+      .then(res => {
+        this.setState({
+          book: res.data.volumeInfo,
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
     const { book } = this.state;
-    const { user, match } = this.props;
+    const { match } = this.props;
     return book ? (
       <div className="container padding">
         <StyledCard className="card">
           <div className="row">
             <div className="col m9 s12">
               <StyledRow className="row">
-                <div className="col m2">
-                  {book && book.volumeInfo.imageLinks.thumbnail ? (
-                    <img src={book.volumeInfo.imageLinks.thumbnail} alt="" />
+                <div className="col m3 s12">
+                  {book && book.imageLinks.thumbnail ? (
+                    <img src={book.imageLinks.thumbnail} alt="" />
                   ) : null}
                 </div>
-                <div className="col m10">
+                <div className="col m9 s12">
                   <StyledTitle>
-                    {book.volumeInfo.title}. {book.volumeInfo.subtitle}
+                    {book.title}. {book.subtitle}
                   </StyledTitle>
                   <h6>
                     <span className="grey-text text-lighten-1">Authors: </span>
-                    {book.volumeInfo.authors
-                      ? book.volumeInfo.authors.map(author => {
+                    {book.authors
+                      ? book.authors.map(author => {
                           return `${author}\u00A0\u00A0\u00A0`;
                         })
                       : 'Unknown'}
                   </h6>
                   <h6>
                     <span className="grey-text text-lighten-1">Pages: </span>
-                    {book.volumeInfo.pageCount}
+                    {book.pageCount}
                   </h6>
                   <StarRating
-                    rating={book.bookphiles_api.calculatedRating}
+                    rating={book.book.calculatedRating}
                     numberOfStars={5}
                     starDimension="25px"
                     starRatedColor="#f39c12"
@@ -87,13 +88,13 @@ class BookDetails extends Component {
                 </h5>
                 <StyledDescription
                   dangerouslySetInnerHTML={{
-                    __html: book.volumeInfo.description,
+                    __html: book.description,
                   }}
                 />
               </StyledRow>
-              <Comments comments={book.bookphiles_api.comments} />
+              <Comments comments={book.book.comments} />
 
-              <CommentForm book_id={match.params.book_id} userName={user} />
+              <CommentForm book_id={match.params.book_id} />
             </div>
             <div className="col m3 s12">
               <BookNavigation />
@@ -104,7 +105,11 @@ class BookDetails extends Component {
     ) : null;
   }
 }
-const mapStateToProps = state => ({
-  user: state.auth.user,
-});
-export default connect(mapStateToProps)(BookDetails);
+BookDetails.defaultProps = {
+  match: {},
+};
+BookDetails.propTypes = {
+  match: PropTypes.objectOf(),
+};
+
+export default BookDetails;

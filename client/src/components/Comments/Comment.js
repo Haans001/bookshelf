@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRating from 'react-star-ratings';
 
@@ -20,7 +21,7 @@ const StyledCard = styled.div`
 
 export default function Comment({ comment }) {
   return (
-    <StyledCard className="card" key={comment.id}>
+    <StyledCard className="card">
       <StyledCommentInfo>
         <StarRating
           rating={comment.rating}
@@ -36,3 +37,13 @@ export default function Comment({ comment }) {
     </StyledCard>
   );
 }
+Comment.defaultProps = {
+  comment: {
+    rating: 0,
+    userName: 'Unknown',
+    submit_date: 'Infinite',
+  },
+};
+Comment.propTypes = {
+  comment: PropTypes.objectOf(),
+};

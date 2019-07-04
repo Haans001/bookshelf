@@ -22,9 +22,7 @@ export const signUp = credentials => dispatch => {
     .catch(err => {
       dispatch({
         type: 'REGISTER_FAILED',
-        payload: {
-          msg: err.response.data.msg,
-        },
+        payload: { errors: err.response.data.errors },
       });
     });
 };

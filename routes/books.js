@@ -60,7 +60,10 @@ router.get("/get/:book_id", (req, res) => {
               comments: null
             };
           }
-          jsonData["bookphiles_api"] = book;
+          jsonData.volumeInfo = {
+            ...jsonData.volumeInfo,
+            book
+          };
           return res.status(200).json(jsonData);
         });
     });

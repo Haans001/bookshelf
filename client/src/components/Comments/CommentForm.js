@@ -15,13 +15,13 @@ const StyledTextArea = styled.textarea`
 class CommentForm extends Component {
   state = {
     book_id: this.props.book_id,
-    userName: this.props.user ? this.props.user.userName : null,
     rating: 0,
     body: '',
   };
 
   componentDidMount() {
     $('#textarea1').trigger('autoresize');
+    console.log(this.props);
   }
 
   changeRating = newRating => {
@@ -34,6 +34,10 @@ class CommentForm extends Component {
     e.preventDefault();
     const { submitComment } = this.props;
     submitComment(this.state);
+    this.setState({
+      rating: 0,
+      body: '',
+    });
   };
 
   handleChange = e => {
@@ -81,9 +85,9 @@ class CommentForm extends Component {
             </form>
           </div>
         ) : (
-          <h4 className="center teal-text teal-accent-3">
+          <h5 className="center teal-text teal-accent-3">
             Log in to add a comment
-          </h4>
+          </h5>
         )}
       </StyledWrapper>
     );
@@ -92,8 +96,11 @@ class CommentForm extends Component {
 const mapDispatchToProps = dispatch => ({
   submitComment: comment => dispatch(submitComment(comment)),
 });
+const mapStateToProps = state => ({
+  user: state.auth.user,
+});
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CommentForm);

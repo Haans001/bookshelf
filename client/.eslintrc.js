@@ -21,9 +21,10 @@ module.exports = {
   plugins: ['react', 'prettier', 'jsx-a11y', 'import'],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'react/prop-types': 0,
     'jsx-a11y/label-has-for': 0,
     'jsx-a11y/label-has-associated-control': 0,
     'import/prefer-default-export': 0,
+    'no-underscore-dangle': 0,
+    'no-shadow': 0,
   },
 };
