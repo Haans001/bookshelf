@@ -1,6 +1,6 @@
+# Bookphiles
+Full stack app for my portfolio. 
 
-Full stack app using express.js on backend, and React on front=end with Styled Components.
-Database is MongoDB.
 
 ### License
 This project is licensed under the MIT License
