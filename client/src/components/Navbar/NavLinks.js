@@ -50,9 +50,9 @@ const mapStateToProps = state => ({
   msg: state.auth.error,
   isAuthenticated: state.auth.isAuthenticated,
 });
-const mapDispatchToProps = dispatch => ({
-  signOut: () => dispatch(signOut()),
-});
+const mapDispatchToProps = {
+  signOut,
+};
 
 export default connect(
   mapStateToProps,

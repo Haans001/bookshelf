@@ -118,9 +118,9 @@ class SignIn extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  signIn: state => dispatch(signIn(state)),
-});
+const mapDispatchToProps = {
+  signIn,
+};
 const mapStateToProps = state => ({
   errors: state.errors.loginErrors,
   isAuthenticated: state.auth.isAuthenticated,
@@ -134,6 +134,7 @@ export default connect(
 SignIn.defaultProps = {
   errors: [{ msg: '', param: '' }],
   isAuthenticated: false,
+  signIn() {},
 };
 SignIn.propTypes = {
   errors: PropTypes.arrayOf(),

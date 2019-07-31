@@ -37,6 +37,7 @@ export default function Comment({ comment }) {
     </StyledCard>
   );
 }
+
 Comment.defaultProps = {
   comment: {
     rating: 0,
@@ -45,5 +46,7 @@ Comment.defaultProps = {
   },
 };
 Comment.propTypes = {
-  comment: PropTypes.objectOf(),
+  comment: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
 };

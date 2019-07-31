@@ -21,7 +21,6 @@ class CommentForm extends Component {
 
   componentDidMount() {
     $('#textarea1').trigger('autoresize');
-    console.log(this.props);
   }
 
   changeRating = newRating => {
@@ -32,8 +31,8 @@ class CommentForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { submitComment } = this.props;
-    submitComment(this.state);
+    const { submitComment: _submitComment } = this.props;
+    _submitComment(this.state);
     this.setState({
       rating: 0,
       body: '',
@@ -93,9 +92,13 @@ class CommentForm extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  submitComment: comment => dispatch(submitComment(comment)),
-});
+// const mapDispatchToProps = dispatch => ({
+//   submitComment: comment => dispatch(submitComment(comment)),
+// });
+const mapDispatchToProps = {
+  submitComment,
+};
+
 const mapStateToProps = state => ({
   user: state.auth.user,
 });

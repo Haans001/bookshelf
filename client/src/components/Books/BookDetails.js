@@ -109,7 +109,11 @@ BookDetails.defaultProps = {
   match: {},
 };
 BookDetails.propTypes = {
-  match: PropTypes.objectOf(),
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      book_id: PropTypes.string,
+    }),
+  }),
 };
 
 export default BookDetails;

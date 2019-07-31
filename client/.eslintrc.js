@@ -26,5 +26,6 @@ module.exports = {
     'import/prefer-default-export': 0,
     'no-underscore-dangle': 0,
     'no-shadow': 0,
+    'jsx-a11y/anchor-is-valid': 0,
   },
 };

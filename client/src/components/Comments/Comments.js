@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Comment from './Comment';
 
 export default function Comments({ comments }) {
@@ -10,7 +11,7 @@ export default function Comments({ comments }) {
       {comments ? (
         <React.Fragment>
           {comments.map(comment => {
-            return <Comment comment={comment} key={comment.id} />;
+            return <Comment comment={comment} key={comment.submit_date} />;
           })}
         </React.Fragment>
       ) : (
@@ -21,3 +22,14 @@ export default function Comments({ comments }) {
     </div>
   );
 }
+
+Comments.defaultProps = {
+  comments: null,
+};
+Comments.propTypes = {
+  comments: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    )
+  ),
+};

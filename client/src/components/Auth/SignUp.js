@@ -114,9 +114,9 @@ class SignUp extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  signUp: state => dispatch(signUp(state)),
-});
+const mapDispatchToProps = {
+  signUp,
+};
 const mapStateToProps = state => ({
   errors: state.errors.registerErrors,
   isAuthenticated: state.auth.isAuthenticated,
@@ -130,9 +130,10 @@ export default connect(
 SignUp.defaultProps = {
   errors: [{ msg: '', param: '' }],
   isAuthenticated: false,
+  signUp() {},
 };
 SignUp.propTypes = {
   errors: PropTypes.arrayOf(),
   isAuthenticated: PropTypes.bool,
-  signIn: PropTypes.func,
+  signUp: PropTypes.func,
 };

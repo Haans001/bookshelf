@@ -69,8 +69,8 @@ class SearchComponent extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { search } = this.props;
-    search(this.state);
+    const { searchBooks } = this.props;
+    searchBooks(this.state);
   };
 
   render() {
@@ -149,9 +149,9 @@ class SearchComponent extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  search: state => dispatch(searchBooks(state)),
-});
+const mapDispatchToProps = {
+  searchBooks,
+};
 
 export default connect(
   null,
