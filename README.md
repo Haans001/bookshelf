@@ -28,6 +28,7 @@ npm run dev
 
 ## Deployment
 This app is live on heroku.
+https://bookshelf-free.herokuapp.com/
 
 ## Author
 
